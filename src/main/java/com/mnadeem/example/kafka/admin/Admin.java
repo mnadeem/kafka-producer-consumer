@@ -2,12 +2,14 @@ package com.mnadeem.example.kafka.admin;
 
 import java.util.Collections;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
 import org.apache.kafka.clients.admin.DeleteTopicsResult;
 import org.apache.kafka.clients.admin.DescribeTopicsResult;
 import org.apache.kafka.clients.admin.KafkaAdminClient;
+import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.admin.TopicDescription;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -57,7 +59,21 @@ public final class Admin {
 		} catch (Exception e) {
 			System.out.print("Delete Topics denied\n");
 			System.out.print(e.getMessage());
-			// throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+
+	public static void listTopics(String brokers) {
+		// Set properties used to configure admin client
+		Properties properties = getProperties(brokers);
+
+		try (final AdminClient adminClient = KafkaAdminClient.create(properties)) {
+			final ListTopicsResult listTopicsResult = adminClient.listTopics();
+			Set<String> names = listTopicsResult.names().get();
+			System.out.println("Topics : " +  names);
+			
+		} catch (Exception e) {
+			System.out.print("List Topics denied\n");
+			System.out.print(e.getMessage());
 		}
 	}
 

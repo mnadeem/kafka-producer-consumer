@@ -31,6 +31,9 @@ public class Runner {
 		case DELETE:
 			Admin.deleteTopics(brokers, topicName);
 			break;
+		case LIST:
+			Admin.listTopics(brokers);
+			break;
 		default:
 			arguments.printUsage();
 		}

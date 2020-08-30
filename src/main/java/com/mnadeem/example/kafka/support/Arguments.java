@@ -15,9 +15,9 @@ public class Arguments {
 			printUsage();
 		}
 
-		this.option = Option.getOption(args[0]);
-		this.topicName = args[1];
-		this.brokers = args[2];
+		this.brokers = args[0];
+		this.option = Option.getOption(args[1]);
+		this.topicName = args[2];
 
 		if (args.length == 4) {
 			this.groupId = args[3];
@@ -32,7 +32,7 @@ public class Arguments {
 
 	public void printUsage() {
 		System.out.println("Usage:");
-		System.out.println("kafka-producer-consumer.jar <produce|consume|describe|create|delete> <topicName> <brokerhosts> [groupid]");
+		System.out.println("kafka-producer-consumer.jar <brokerhosts> <produce|consume|describe|create|delete> <topicName> [groupid]");
 		System.exit(1);
 	}
 

@@ -1,7 +1,7 @@
 package com.mnadeem.example.kafka.support;
 
 public enum Option {
-	PRODUCE("produce"), CONSUME("consume"), DESCRIBE("describe"), CREATE("create"), DELETE("delete"), UNKNOWN("unknown");
+	PRODUCE("produce"), CONSUME("consume"), DESCRIBE("describe"), CREATE("create"), DELETE("delete"), LIST("list"),UNKNOWN("unknown");
 	
 	private String code;
 
