@@ -28,10 +28,14 @@ public class DefaultConsumer implements Consumer {
 			} else {
 				// Yes, loop over records
 				for (ConsumerRecord<String, String> record : records) {
-					// Display record and count
 					count += 1;
-					System.out.println(count + ": " + record.value());
+		              System.out.println("Record Key " + record.key());
+					  System.out.println(count + ": " + record.value());
+		              System.out.println("Record partition " + record.partition());
+		              System.out.println("Record offset " + record.offset());
 				}
+		        // commits the offset of record to broker. 
+		        consumer.commitAsync();
 			}
 		}
 	}
