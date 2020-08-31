@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -44,23 +45,15 @@ public class DefaultConsumer implements Consumer {
 	}
 
 	private Properties getProperties(String brokers, String groupId) {
-		// Configure the consumer
 		Properties properties = new Properties();
-		// Point it to the brokers
-		properties.setProperty("bootstrap.servers", brokers);
-		// Set the consumer group (all consumers must belong to a group).
-		properties.setProperty("group.id", groupId);
-		// Set how to serialize key/value pairs
-		properties.setProperty("key.deserializer", StringDeserializer.class.getName());
-		properties.setProperty("value.deserializer", StringDeserializer.class.getName());
-		// When a group is first created, it has no offset stored to start reading from.
-		// This tells it to start
-		// with the earliest record in the stream.
-		properties.setProperty("auto.offset.reset", "earliest");
+		properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, brokers);
+		properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+		properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+		properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+		properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
 		// specify the protocol for Domain Joined clusters
-		// properties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG,
-		// "SASL_PLAINTEXT");
+		// properties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
 		return properties;
 	}
 }

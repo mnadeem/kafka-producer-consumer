@@ -20,13 +20,10 @@ public final class Admin {
 	public static Properties getProperties(String brokers) {
 		Properties properties = new Properties();
 		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, brokers);
-
-		// Set how to serialize key/value pairs
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		// specify the protocol for Domain Joined clusters
-		// properties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG,
-		// "SASL_PLAINTEXT");
+		// properties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
 
 		return properties;
 	}

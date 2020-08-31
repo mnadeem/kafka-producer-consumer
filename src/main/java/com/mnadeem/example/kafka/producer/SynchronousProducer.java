@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.util.Random;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
@@ -35,16 +36,11 @@ public class SynchronousProducer implements Producer {
 	}
 
 	private Properties getProperties(String brokers) {
-		// Set properties used to configure the producer
 		Properties properties = new Properties();
-		// Set the brokers (bootstrap servers)
-		properties.setProperty("bootstrap.servers", brokers);
-		// Set how to serialize key/value pairs
-		properties.setProperty("key.serializer", StringSerializer.class.getName());
-		properties.setProperty("value.serializer", StringSerializer.class.getName());
-		// specify the protocol for Domain Joined clusters
-		// properties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG,
-		// "SASL_PLAINTEXT");
+		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, brokers);
+		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+		// properties.setProperty(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
 		return properties;
 	}
 }
