@@ -12,7 +12,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 public class DefaultConsumer implements Consumer {
 
 	@Override
-	public int consume(String brokers, String groupId, String topicName) {
+	public void consume(String brokers, String groupId, String topicName) {
 
 		KafkaConsumer<String, String> consumer = buildConsumer(brokers, groupId, topicName);
 
